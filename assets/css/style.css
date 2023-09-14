@@ -1,0 +1,43 @@
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 15px;
+    padding: 0px 10px 0px 10px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#welcomePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#questionOne {
+    display: none;
+}
+
+#questionTwo {
+    display: none;
+}
+
+#questionThree {
+    display: none;
+}
+
+#questionFour {
+    display: none;
+}
+
+#result-msg {
+    display: none;
+}
+
+#inputPage {
+    display: none;
+}
