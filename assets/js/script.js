@@ -4,6 +4,7 @@ var timerCount;
 var startButton = document.querySelector("#startBtn");
 var submitButton = document.querySelector("#submitBtn");
 var initialsInput = document.querySelector("#hs-name");
+var hsTable = document.querySelector("#hs-table");
 
 var initialsAll = [];
 var scoresAll = [];
@@ -76,6 +77,40 @@ function storeScore() {
     // currentScore.value = "";
     localStorage.setItem('scores', JSON.stringify(scoresAll));
 };
+
+function uploadHighscore() {
+    for (var i = 0; i < scoresAll.length; i++) {
+        var score = scoresAll[i];
+        var init = initialsAll[i];
+
+        var tr = document.createElement("tr");
+        var tdInit = document.createElement("td");
+        var tdScore = document.createElement("td");
+        
+        tdScore.textContent = score;
+        tdScore.setAttribute("data-index", i);
+        tdInit.textContent = init;
+        tdInit.setAttribute("data-index", i);
+
+        tr.appendChild(tdScore);
+        hsTable.appendChild(tr);
+        // Create tr, create td, add text content to td
+    }
+
+    // for (var i = 0; i < todos.length; i++) {
+    //     var todo = todos[i];
+    
+    //     var li = document.createElement("li");
+    //     li.textContent = todo;
+    //     li.setAttribute("data-index", i);
+    
+    //     var button = document.createElement("button");
+    //     button.textContent = "Complete ✔️";
+    
+    //     li.appendChild(button);
+    //     todoList.appendChild(li);
+    //   }
+}
 
 submitButton.addEventListener("click", function(event) {
 
