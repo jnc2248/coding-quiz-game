@@ -1,11 +1,12 @@
 var main = document.querySelector("main");
-var timerElement = document.querySelector(".timerCount");
-var timerCount;
+var inputPg = document.querySelector("#inputPage")
+var timerElement = document.querySelector("#timerCount");
 var startButton = document.querySelector("#startBtn");
 var submitButton = document.querySelector("#submitBtn");
 var initialsInput = document.querySelector("#hs-name");
 var hsList = document.querySelector("#hsList");
 
+var timerCount;
 var initialsAll = [];
 var scoresAll = [];
 var currentScore = 0;
@@ -22,12 +23,6 @@ function startTimer() {
         };
 
         // How to clear timer between attempts?
-        // main.addEventListener("click", function (event) {
-        //     var test = event.target
-        //     if (test.matches("#fourD") || test.matches("#fourA") || test.matches("#fourB") || test.matches("#fourC")) {
-        //         clearInterval(timer);
-        //     }
-        // });
 
     }, 1000);
 };
@@ -35,8 +30,7 @@ function startTimer() {
 function startGame() {
     timerCount = 75;
     startButton.disabled = true;
-    // Disable submit button until press down event in for input
-    //     submitButton.disabled = true;
+    submitButton.disabled = true;
     startTimer();
 
     document.querySelector("#questionOne").style.display = "block";
@@ -105,6 +99,10 @@ function storeAll() {
 //     }
 // };
 
+inputPg.addEventListener("keydown", function() {
+    submitButton.disabled = false;
+});
+
 submitButton.addEventListener("click", function (event) {
 
     var initials = initialsInput.value.trim();
@@ -114,6 +112,7 @@ submitButton.addEventListener("click", function (event) {
     };
 
     initialsAll.push(initials);
+    
     initialsInput.value = "";
 
     console.log(initialsAll);
@@ -222,6 +221,8 @@ main.addEventListener("click", function (event) {
         currentScore += 10;
         console.log(currentScore);
 
+        timerCount = 0;
+
         finalScore.textContent = currentScore;
 
         document.querySelector("#questionFour").style.display = "none";
@@ -236,6 +237,8 @@ main.addEventListener("click", function (event) {
             currentScore -= 10;
             console.log(currentScore);
         };
+
+        timerCount = 0;
 
         finalScore.textContent = currentScore;
 
