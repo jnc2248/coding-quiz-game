@@ -5,6 +5,7 @@ var startButton = document.querySelector("#startBtn");
 var submitButton = document.querySelector("#submitBtn");
 var initialsInput = document.querySelector("#hs-name");
 var finalScore = document.querySelector("#finalScore");
+var highScorePage = document.querySelector("#highScorePage");
 // var hsList = document.querySelector("#hsList");
 // var testing = document.querySelector("#result-msg");
 
@@ -26,9 +27,9 @@ function startTimer() {
 };
 
 function startGame() {
-    timerCount = 75;
+    timerCount = 60;
     startButton.disabled = true;
-    // submitButton.disabled = true;
+    submitButton.disabled = true;
     startTimer();
 
     document.querySelector("#questionOne").style.display = "block";
@@ -51,8 +52,6 @@ function init() {
 function playAgain() {
     startButton.disabled = false;
 
-    // Need to reset timer!
-
     document.querySelector("#welcomePage").style.display = "block";
     document.querySelector("#questionOne").style.display = "none";
     document.querySelector("#questionTwo").style.display = "none";
@@ -64,6 +63,7 @@ function playAgain() {
 
 function endGame() {
     clearInterval(timer);
+    currentScore = timerCount;
     finalScore.textContent = currentScore;
 
     document.querySelector("#welcomePage").style.display = "none";
@@ -82,23 +82,26 @@ function storeAll() {
     uploadHighscore();
 }
 
-// function uploadHighscore() {
-//     for (var i = 0; i < scoresAll.length; i++) {
-//         var score = scoresAll[i];
-//         var init = initialsAll[i];
+function uploadHighscore() {
+    hsList.innerHTML = "";
 
-//         var liInit = document.createElement("li");
-//         var liScore = document.createElement("li");
+    for (var i = 0; i < scoresAll.length; i++) {
+        var score = scoresAll[i];
+        var init = initialsAll[i];
 
-//         liScore.textContent = score;
-//         liScore.setAttribute("data-index", i);
-//         liInit.textContent = init;
-//         liInit.setAttribute("data-index", i);
+        var newRow = document.createElement("tr")
+        var liInit = document.createElement("td");
+        var liScore = document.createElement("td");
 
-//         testing.append(liInit);
-//         testing.append(liScore);
-//     }
-// };
+        liScore.textContent = score;
+        liScore.setAttribute("data-index", i);
+        liInit.textContent = init;
+        liInit.setAttribute("data-index", i);
+
+        newRow.append(liInit, liScore);
+        hsList.appendChild(newRow);
+    }
+};
 
 inputPg.addEventListener("keydown", function () {
     submitButton.disabled = false;
@@ -123,7 +126,7 @@ submitButton.addEventListener("click", function (event) {
     console.log(scoresAll);
 
     storeAll();
-})
+});
 
 main.addEventListener("click", function (event) {
     var start = event.target
@@ -131,14 +134,21 @@ main.addEventListener("click", function (event) {
         currentScore = 0;
         startGame();
     }
-})
+});
 
 main.addEventListener("click", function (event) {
     var replay = event.target
     if (replay.matches("#againBtn")) {
         playAgain();
     }
-})
+});
+
+main.addEventListener("click", function (event) {
+    var replay = event.target
+    if (replay.matches("#againBtn")) {
+        playAgain();
+    }
+});
 
 main.addEventListener("click", function (event) {
     var test = event.target
@@ -147,8 +157,8 @@ main.addEventListener("click", function (event) {
 
         console.log("correct!");
 
-        currentScore += 10;
-        console.log(currentScore);
+        // currentScore += 10;
+        // console.log(currentScore);
 
         document.querySelector("#questionOne").style.display = "none";
         document.querySelector("#questionTwo").style.display = "block";
@@ -158,10 +168,10 @@ main.addEventListener("click", function (event) {
 
         console.log("incorrect!");
 
-        if (currentScore > 0) {
-            currentScore -= 10;
-            console.log(currentScore);
-        };
+        // if (currentScore > 0) {
+        //     currentScore -= 10;
+        //     console.log(currentScore);
+        // };
 
         document.querySelector("#questionOne").style.display = "none";
         document.querySelector("#questionTwo").style.display = "block";
@@ -173,8 +183,8 @@ main.addEventListener("click", function (event) {
 
         console.log("correct!");
 
-        currentScore += 10;
-        console.log(currentScore);
+        // currentScore += 10;
+        // console.log(currentScore);
 
         document.querySelector("#questionTwo").style.display = "none";
         document.querySelector("#questionThree").style.display = "block";
@@ -183,10 +193,10 @@ main.addEventListener("click", function (event) {
 
         console.log("incorrect!");
 
-        if (currentScore > 0) {
-            currentScore -= 10;
-            console.log(currentScore);
-        };
+        // if (currentScore > 0) {
+        //     currentScore -= 10;
+        //     console.log(currentScore);
+        // };
 
         document.querySelector("#questionTwo").style.display = "none";
         document.querySelector("#questionThree").style.display = "block";
@@ -196,8 +206,8 @@ main.addEventListener("click", function (event) {
 
         console.log("correct!");
 
-        currentScore += 10;
-        console.log(currentScore);
+        // currentScore += 10;
+        // console.log(currentScore);
 
         document.querySelector("#questionThree").style.display = "none";
         document.querySelector("#questionFour").style.display = "block";
@@ -206,10 +216,10 @@ main.addEventListener("click", function (event) {
 
         console.log("incorrect!");
 
-        if (currentScore > 0) {
-            currentScore -= 10;
-            console.log(currentScore);
-        };
+        // if (currentScore > 0) {
+        //     currentScore -= 10;
+        //     console.log(currentScore);
+        // };
 
         document.querySelector("#questionThree").style.display = "none";
         document.querySelector("#questionFour").style.display = "block";
@@ -219,8 +229,8 @@ main.addEventListener("click", function (event) {
 
         console.log("correct!");
 
-        currentScore += 10;
-        console.log(currentScore);
+        // currentScore += 10;
+        // console.log(currentScore);
         
         endGame();
 
@@ -228,10 +238,10 @@ main.addEventListener("click", function (event) {
 
         console.log("incorrect!");
 
-        if (currentScore > 0) {
-            currentScore -= 10;
-            console.log(currentScore);
-        };
+        // if (currentScore > 0) {
+        //     currentScore -= 10;
+        //     console.log(currentScore);
+        // };
 
         endGame();
     };
