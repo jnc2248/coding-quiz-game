@@ -4,33 +4,31 @@ var timerElement = document.querySelector("#timerCount");
 var startButton = document.querySelector("#startBtn");
 var submitButton = document.querySelector("#submitBtn");
 var initialsInput = document.querySelector("#hs-name");
-var hsList = document.querySelector("#hsList");
+var finalScore = document.querySelector("#finalScore");
+// var hsList = document.querySelector("#hsList");
+// var testing = document.querySelector("#result-msg");
 
+var currentScore = 0;
 var timerCount;
 var initialsAll = [];
 var scoresAll = [];
-var currentScore = 0;
-var finalScore = document.querySelector("#finalScore");
+var timer;
 
 function startTimer() {
-    var timer = setInterval(function () {
+    timer = setInterval(function () {
         timerCount--;
         timerElement.textContent = timerCount;
 
-        if (timerCount === 0) {
-            clearInterval(timer);
-            loseGame();
+        if (timerCount <= 0) {
+            endGame();
         };
-
-        // How to clear timer between attempts?
-
     }, 1000);
 };
 
 function startGame() {
     timerCount = 75;
     startButton.disabled = true;
-    submitButton.disabled = true;
+    // submitButton.disabled = true;
     startTimer();
 
     document.querySelector("#questionOne").style.display = "block";
@@ -64,7 +62,10 @@ function playAgain() {
     document.querySelector("#inputPage").style.display = "none";
 }
 
-function loseGame() {
+function endGame() {
+    clearInterval(timer);
+    finalScore.textContent = currentScore;
+
     document.querySelector("#welcomePage").style.display = "none";
     document.querySelector("#questionOne").style.display = "none";
     document.querySelector("#questionTwo").style.display = "none";
@@ -78,7 +79,7 @@ function storeAll() {
     localStorage.setItem('scores', JSON.stringify(scoresAll));
     localStorage.setItem('initials', JSON.stringify(initialsAll));
 
-    // uploadHighscore();
+    uploadHighscore();
 }
 
 // function uploadHighscore() {
@@ -94,12 +95,12 @@ function storeAll() {
 //         liInit.textContent = init;
 //         liInit.setAttribute("data-index", i);
 
-//         hsList.append(liInit);
-//         hsList.append(liScore);
+//         testing.append(liInit);
+//         testing.append(liScore);
 //     }
 // };
 
-inputPg.addEventListener("keydown", function() {
+inputPg.addEventListener("keydown", function () {
     submitButton.disabled = false;
 });
 
@@ -112,7 +113,7 @@ submitButton.addEventListener("click", function (event) {
     };
 
     initialsAll.push(initials);
-    
+
     initialsInput.value = "";
 
     console.log(initialsAll);
@@ -220,14 +221,8 @@ main.addEventListener("click", function (event) {
 
         currentScore += 10;
         console.log(currentScore);
-
-        timerCount = 0;
-
-        finalScore.textContent = currentScore;
-
-        document.querySelector("#questionFour").style.display = "none";
-        document.querySelector("#result-msg").style.display = "none";
-        document.querySelector("#inputPage").style.display = "block";
+        
+        endGame();
 
     } else if (test.matches("#fourA") || test.matches("#fourB") || test.matches("#fourC")) {
 
@@ -238,13 +233,7 @@ main.addEventListener("click", function (event) {
             console.log(currentScore);
         };
 
-        timerCount = 0;
-
-        finalScore.textContent = currentScore;
-
-        document.querySelector("#questionFour").style.display = "none";
-        document.querySelector("#result-msg").style.display = "none";
-        document.querySelector("#inputPage").style.display = "block";
+        endGame();
     };
 });
 
