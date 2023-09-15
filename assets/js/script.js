@@ -6,6 +6,7 @@ var submitButton = document.querySelector("#submitBtn");
 var initialsInput = document.querySelector("#hs-name");
 
 var initialsAll = [];
+var scoresAll = [];
 var currentScore = 0;
 var finalScore = document.querySelector("#finalScore");
 
@@ -44,6 +45,8 @@ function startGame() {
 function playAgain() {
     startButton.disabled = false;
 
+// Need to reset score and timer!
+
     document.querySelector("#welcomePage").style.display = "block";
     document.querySelector("#questionOne").style.display = "none";
     document.querySelector("#questionTwo").style.display = "none";
@@ -64,11 +67,17 @@ function loseGame() {
 };
 
 function storeInitials() {
-    localStorage.setItem("initials", JSON.stringify(initialsAll));
+    localStorage.setItem('initials', JSON.stringify(initialsAll));
 };
 
-initialsInput.addEventListener("submit", function(event) {
-    event.preventDefault();
+function storeScore() {
+    scoresAll.push(currentScore);
+    console.log(scoresAll);
+    // currentScore.value = "";
+    localStorage.setItem('scores', JSON.stringify(scoresAll));
+};
+
+submitButton.addEventListener("click", function(event) {
 
     var initials = initialsInput.value.trim();
 
@@ -79,7 +88,10 @@ initialsInput.addEventListener("submit", function(event) {
     initialsAll.push(initials);
     initialsInput.value = "";
 
+    console.log(initialsAll);
+
     storeInitials();
+    storeScore();
 })
 
 main.addEventListener("click", function (event) {
