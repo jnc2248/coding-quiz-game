@@ -67,16 +67,26 @@ function loseGame() {
     document.querySelector("#inputPage").style.display = "block";
 };
 
-function storeInitials() {
-    localStorage.setItem('initials', JSON.stringify(initialsAll));
-};
+// function storeInitials() {
+//     localStorage.setItem('initials', JSON.stringify(initialsAll));
+// };
 
-function storeScore() {
+// function storeScore() {
+//     scoresAll.push(currentScore);
+//     console.log(scoresAll);
+//     // currentScore.value = "";
+//     localStorage.setItem('scores', JSON.stringify(scoresAll));
+// };
+
+function storeAll() {
     scoresAll.push(currentScore);
     console.log(scoresAll);
     // currentScore.value = "";
     localStorage.setItem('scores', JSON.stringify(scoresAll));
-};
+    localStorage.setItem('initials', JSON.stringify(initialsAll));
+
+
+}
 
 function uploadHighscore() {
     for (var i = 0; i < scoresAll.length; i++) {
@@ -86,7 +96,7 @@ function uploadHighscore() {
         var tr = document.createElement("tr");
         var tdInit = document.createElement("td");
         var tdScore = document.createElement("td");
-        
+
         tdScore.textContent = score;
         tdScore.setAttribute("data-index", i);
         tdInit.textContent = init;
@@ -132,6 +142,7 @@ submitButton.addEventListener("click", function(event) {
 main.addEventListener("click", function (event) {
     var start = event.target
     if (start.matches("#startBtn")) {
+        currentScore = 0;
         startGame();
     }
 })
