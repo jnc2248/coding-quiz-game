@@ -11,12 +11,21 @@ function startTimer() {
         if (timerCount === 0) {
             clearInterval(timer);
             loseGame();
-        }
+        };
+
+// How to clear timer between attempts?
+        // main.addEventListener("click", function (event) {
+        //     var test = event.target
+        //     if (test.matches("#fourD") || test.matches("#fourA") || test.matches("#fourB") || test.matches("#fourC")) {
+        //         clearInterval(timer);
+        //     }
+        // });
+        
     }, 1000);
 };
 
 function startGame() {
-    timerCount = 75;
+    timerCount = 30;
     startButton.disabled = true;
     startTimer();
 
@@ -24,7 +33,20 @@ function startGame() {
     document.querySelector("#welcomePage").style.display = "none";
 };
 
+function playAgain() {
+    startButton.disabled = false;
+
+    document.querySelector("#welcomePage").style.display = "block";
+    document.querySelector("#questionOne").style.display = "none";
+    document.querySelector("#questionTwo").style.display = "none";
+    document.querySelector("#questionThree").style.display = "none";
+    document.querySelector("#questionFour").style.display = "none";
+    document.querySelector("#result-msg").style.display = "none";
+    document.querySelector("#inputPage").style.display = "none";
+}
+
 function loseGame() {
+    document.querySelector("#welcomePage").style.display = "none";
     document.querySelector("#questionOne").style.display = "none";
     document.querySelector("#questionTwo").style.display = "none";
     document.querySelector("#questionThree").style.display = "none";
@@ -37,6 +59,13 @@ main.addEventListener("click", function (event) {
     var start = event.target
     if (start.matches("#startBtn")) {
         startGame();
+    }
+})
+
+main.addEventListener("click", function (event) {
+    var replay = event.target
+    if (replay.matches("#againBtn")) {
+        playAgain();
     }
 })
 
@@ -108,3 +137,4 @@ main.addEventListener("click", function (event) {
         document.querySelector("#inputPage").style.display = "block";
     };
 });
+
