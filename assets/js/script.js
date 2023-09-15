@@ -4,7 +4,7 @@ var timerCount;
 var startButton = document.querySelector("#startBtn");
 var submitButton = document.querySelector("#submitBtn");
 var initialsInput = document.querySelector("#hs-name");
-var hsTable = document.querySelector("#hs-table");
+var hsList = document.querySelector("#hsList");
 
 var initialsAll = [];
 var scoresAll = [];
@@ -21,7 +21,7 @@ function startTimer() {
             loseGame();
         };
 
-// How to clear timer between attempts?
+        // How to clear timer between attempts?
         // main.addEventListener("click", function (event) {
         //     var test = event.target
         //     if (test.matches("#fourD") || test.matches("#fourA") || test.matches("#fourB") || test.matches("#fourC")) {
@@ -33,20 +33,33 @@ function startTimer() {
 };
 
 function startGame() {
-    timerCount = 30;
+    timerCount = 75;
     startButton.disabled = true;
-// Disable submit button until press down event in for input
-//     submitButton.disabled = true;
+    // Disable submit button until press down event in for input
+    //     submitButton.disabled = true;
     startTimer();
 
     document.querySelector("#questionOne").style.display = "block";
     document.querySelector("#welcomePage").style.display = "none";
 };
 
+function init() {
+    var storedInitials = JSON.parse(localStorage.getItem("initials"));
+    var storedScores = JSON.parse(localStorage.getItem("scores"));
+
+    if (storedInitials !== null) {
+        initialsAll = storedInitials;
+    };
+
+    if (storedScores !== null) {
+        scoresAll = storedScores;
+    };
+};
+
 function playAgain() {
     startButton.disabled = false;
 
-// Need to reset score and timer!
+    // Need to reset timer!
 
     document.querySelector("#welcomePage").style.display = "block";
     document.querySelector("#questionOne").style.display = "none";
@@ -67,62 +80,32 @@ function loseGame() {
     document.querySelector("#inputPage").style.display = "block";
 };
 
-// function storeInitials() {
-//     localStorage.setItem('initials', JSON.stringify(initialsAll));
-// };
-
-// function storeScore() {
-//     scoresAll.push(currentScore);
-//     console.log(scoresAll);
-//     // currentScore.value = "";
-//     localStorage.setItem('scores', JSON.stringify(scoresAll));
-// };
-
 function storeAll() {
-    scoresAll.push(currentScore);
-    console.log(scoresAll);
-    // currentScore.value = "";
     localStorage.setItem('scores', JSON.stringify(scoresAll));
     localStorage.setItem('initials', JSON.stringify(initialsAll));
 
-
+    // uploadHighscore();
 }
 
-function uploadHighscore() {
-    for (var i = 0; i < scoresAll.length; i++) {
-        var score = scoresAll[i];
-        var init = initialsAll[i];
+// function uploadHighscore() {
+//     for (var i = 0; i < scoresAll.length; i++) {
+//         var score = scoresAll[i];
+//         var init = initialsAll[i];
 
-        var tr = document.createElement("tr");
-        var tdInit = document.createElement("td");
-        var tdScore = document.createElement("td");
+//         var liInit = document.createElement("li");
+//         var liScore = document.createElement("li");
 
-        tdScore.textContent = score;
-        tdScore.setAttribute("data-index", i);
-        tdInit.textContent = init;
-        tdInit.setAttribute("data-index", i);
+//         liScore.textContent = score;
+//         liScore.setAttribute("data-index", i);
+//         liInit.textContent = init;
+//         liInit.setAttribute("data-index", i);
 
-        tr.appendChild(tdScore);
-        hsTable.appendChild(tr);
-        // Create tr, create td, add text content to td
-    }
+//         hsList.append(liInit);
+//         hsList.append(liScore);
+//     }
+// };
 
-    // for (var i = 0; i < todos.length; i++) {
-    //     var todo = todos[i];
-    
-    //     var li = document.createElement("li");
-    //     li.textContent = todo;
-    //     li.setAttribute("data-index", i);
-    
-    //     var button = document.createElement("button");
-    //     button.textContent = "Complete ✔️";
-    
-    //     li.appendChild(button);
-    //     todoList.appendChild(li);
-    //   }
-}
-
-submitButton.addEventListener("click", function(event) {
+submitButton.addEventListener("click", function (event) {
 
     var initials = initialsInput.value.trim();
 
@@ -135,8 +118,11 @@ submitButton.addEventListener("click", function(event) {
 
     console.log(initialsAll);
 
-    storeInitials();
-    storeScore();
+    scoresAll.push(currentScore);
+
+    console.log(scoresAll);
+
+    storeAll();
 })
 
 main.addEventListener("click", function (event) {
@@ -171,7 +157,7 @@ main.addEventListener("click", function (event) {
     } else if (test.matches("#oneB") || test.matches("#oneC") || test.matches("#oneD")) {
 
         console.log("incorrect!");
-        
+
         if (currentScore > 0) {
             currentScore -= 10;
             console.log(currentScore);
@@ -259,3 +245,4 @@ main.addEventListener("click", function (event) {
     };
 });
 
+init();
