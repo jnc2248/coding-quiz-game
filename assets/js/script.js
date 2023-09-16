@@ -10,9 +10,9 @@ var hsList = document.querySelector("#hsList");
 
 var currentScore = 0;
 var timerCount;
+var timer;
 var initialsAll = [];
 var scoresAll = [];
-var timer;
 
 function startTimer() {
     timer = setInterval(function () {
@@ -46,6 +46,8 @@ function init() {
     if (storedScores !== null) {
         scoresAll = storedScores;
     };
+
+    uploadHighscore();
 };
 
 function playAgain() {
@@ -80,7 +82,7 @@ function storeAll() {
     localStorage.setItem('initials', JSON.stringify(initialsAll));
 
     uploadHighscore();
-}
+};
 
 function uploadHighscore() {
     hsList.innerHTML = "";
@@ -94,14 +96,29 @@ function uploadHighscore() {
         var liScore = document.createElement("td");
 
         liScore.textContent = score;
-        liScore.setAttribute("data-index", i);
         liInit.textContent = init;
-        liInit.setAttribute("data-index", i);
 
         newRow.append(liInit, liScore);
         hsList.appendChild(newRow);
-    }
+    };
 };
+
+function clearHighScores() {
+    initialsAll.length = 0;
+    scoresAll.length = 0;
+    console.log(initialsAll);
+    console.log(scoresAll);
+
+    storeAll();
+};
+
+document.addEventListener("click", function (event) {
+    var test = event.target;
+
+    if (test.matches("#clearBtn")) {
+        clearHighScores();
+    };
+});
 
 document.addEventListener("click", function (event) {
     var test = event.target;
@@ -114,8 +131,6 @@ document.addEventListener("click", function (event) {
 
 document.addEventListener("click", function (event) {
     var test = event.target;
-
-    console.log("hs listener working");
 
     if (test.matches("#highScoreButton")) {
         console.log("match working");
@@ -163,13 +178,6 @@ main.addEventListener("click", function (event) {
     if (start.matches("#startBtn")) {
         currentScore = 0;
         startGame();
-    }
-});
-
-main.addEventListener("click", function (event) {
-    var replay = event.target
-    if (replay.matches("#againBtn")) {
-        playAgain();
     }
 });
 
