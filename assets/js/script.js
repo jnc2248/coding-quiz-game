@@ -31,8 +31,6 @@ function startGame() {
     startButton.disabled = true;
     startTimer();
     showQ1();
-    // document.querySelector("#questionOne").style.display = "block";
-    // document.querySelector("#welcomePage").style.display = "none";
 };
 
 function init() {
@@ -42,28 +40,16 @@ function init() {
     if (storedInitials !== null) {
         initialsAll = storedInitials;
     };
-
     if (storedScores !== null) {
         scoresAll = storedScores;
     };
-
     uploadHighscore();
     submitButton.disabled = true;
 };
 
 function playAgain() {
     startButton.disabled = false;
-
     showWelcome();
-
-    // document.querySelector("#welcomePage").style.display = "block";
-    // document.querySelector("#questionOne").style.display = "none";
-    // document.querySelector("#questionTwo").style.display = "none";
-    // document.querySelector("#questionThree").style.display = "none";
-    // document.querySelector("#questionFour").style.display = "none";
-    // document.querySelector("#result-msg").style.display = "none";
-    // document.querySelector("#inputPage").style.display = "none";
-    // document.querySelector("#highScorePage").style.display = "none";
 }
 
 function endGame() {
@@ -72,7 +58,7 @@ function endGame() {
     scoreInput.textContent = finalScore;
 
     document.querySelector("#result-msg").style.display = "none";
-    document.querySelector("#questionFour").style.display = "none";
+    document.querySelector("#questionFive").style.display = "none";
     document.querySelector("#inputPage").style.display = "block";
 };
 
@@ -117,6 +103,7 @@ function showWelcome() {
     document.querySelector("#questionTwo").style.display = "none";
     document.querySelector("#questionThree").style.display = "none";
     document.querySelector("#questionFour").style.display = "none";
+    document.querySelector("#questionFive").style.display = "none";
     document.querySelector("#result-msg").style.display = "none";
     document.querySelector("#inputPage").style.display = "none";
     document.querySelector("#highScorePage").style.display = "none";
@@ -142,12 +129,18 @@ function showQ4() {
     document.querySelector("#questionFour").style.display = "block";
 };
 
+function showQ5() {
+    document.querySelector("#questionFour").style.display = "none";
+    document.querySelector("#questionFive").style.display = "block";
+};
+
 function showHighScore() {
     document.querySelector("#welcomePage").style.display = "none";
     document.querySelector("#questionOne").style.display = "none";
     document.querySelector("#questionTwo").style.display = "none";
     document.querySelector("#questionThree").style.display = "none";
     document.querySelector("#questionFour").style.display = "none";
+    document.querySelector("#questionFive").style.display = "none";
     document.querySelector("#result-msg").style.display = "none";
     document.querySelector("#inputPage").style.display = "none";
     document.querySelector("#highScorePage").style.display = "block";
@@ -175,7 +168,6 @@ document.addEventListener("click", function (event) {
     var test = event.target;
 
     if (test.matches("#goBackBtn")) {
-// Make start button disabled false
         playAgain();
     };
 });
@@ -184,19 +176,8 @@ document.addEventListener("click", function (event) {
     var test = event.target;
 
     if (test.matches("#highScoreButton")) {
-        console.log("match working");
-
         clearInterval(timer);
         showHighScore();
-
-        // document.querySelector("#welcomePage").style.display = "none";
-        // document.querySelector("#questionOne").style.display = "none";
-        // document.querySelector("#questionTwo").style.display = "none";
-        // document.querySelector("#questionThree").style.display = "none";
-        // document.querySelector("#questionFour").style.display = "none";
-        // document.querySelector("#result-msg").style.display = "none";
-        // document.querySelector("#inputPage").style.display = "none";
-        // document.querySelector("#highScorePage").style.display = "block";
     };
 });
 
@@ -205,9 +186,6 @@ inputPg.addEventListener("keydown", function () {
 });
 
 submitButton.addEventListener("click", function (event) {
-
-    submitButton.disabled = true;
-
     var initials = initialsInput.value.trim();
 
     if (initials === "") {
@@ -215,11 +193,8 @@ submitButton.addEventListener("click", function (event) {
     };
 
     initialsAll.push(initials);
-
     initialsInput.value = "";
-
     scoresAll.push(finalScore);
-
     storeAll();
 });
 
@@ -242,107 +217,51 @@ main.addEventListener("click", function (event) {
     var test = event.target
 
     if (test.matches("#oneA")) {
-
-        console.log("correct!");
-
         currentScore += 10;
-        // console.log(currentScore);
-
         correctAnswer();
-
         showQ2();
-
-        // document.querySelector("#questionOne").style.display = "none";
-        // document.querySelector("#questionTwo").style.display = "block";
-        // document.querySelector("#result-msg").style.display = "block";
-
     } else if (test.matches("#oneB") || test.matches("#oneC") || test.matches("#oneD")) {
-
-        console.log("incorrect!");
-
         currentScore -= 10;
-
         wrongAnswer();
-
         showQ2();
-
-        // document.querySelector("#questionOne").style.display = "none";
-        // document.querySelector("#questionTwo").style.display = "block";
-        // document.querySelector("#result-msg").style.display = "block";
-
     };
 
-    if (test.matches("#twoB")) {
-
-        console.log("correct!");
-
+    if (test.matches("#twoD")) {
+        currentScore += 10;
         correctAnswer();
-
         showQ3();
-
-        currentScore += 10;
-        // console.log(currentScore);
-
-        // document.querySelector("#questionTwo").style.display = "none";
-        // document.querySelector("#questionThree").style.display = "block";
-
-    } else if (test.matches("#twoA") || test.matches("#twoC") || test.matches("#twoD")) {
-
-        console.log("incorrect!");
-
-        wrongAnswer();
-
-        showQ3();
-
+    } else if (test.matches("#twoA") || test.matches("#twoB") || test.matches("#twoC")) {
         currentScore -= 10;
-
-        // document.querySelector("#questionTwo").style.display = "none";
-        // document.querySelector("#questionThree").style.display = "block";
+        wrongAnswer();
+        showQ3();
     };
 
-    if (test.matches("#threeC")) {
-
-        console.log("correct!");
-
+    if (test.matches("#threeB")) {
+        currentScore += 10;
         correctAnswer();
-
         showQ4();
-
-        currentScore += 10;
-        // console.log(currentScore);
-
-        // document.querySelector("#questionThree").style.display = "none";
-        // document.querySelector("#questionFour").style.display = "block";
-
-    } else if (test.matches("#threeA") || test.matches("#threeB") || test.matches("#threeD")) {
-
-        console.log("incorrect!");
-
-        wrongAnswer();
-
-        showQ4();
-
+    } else if (test.matches("#threeA") || test.matches("#threeC") || test.matches("#threeD")) {
         currentScore -= 10;
-
-        // document.querySelector("#questionThree").style.display = "none";
-        // document.querySelector("#questionFour").style.display = "block";
+        wrongAnswer();
+        showQ4();
     };
 
-    if (test.matches("#fourD")) {
-
-        console.log("correct!");
-
+    if (test.matches("#fourA")) {
         currentScore += 10;
-        // console.log(currentScore);
+        correctAnswer();
+        showQ5();
+    } else if (test.matches("#fourB") || test.matches("#fourC") || test.matches("#fourD")) {
+        currentScore -= 10;
+        wrongAnswer();
+        showQ5();
+    };
 
+    if (test.matches("#fiveC")) {
+        currentScore += 10;
         endGame();
 
-    } else if (test.matches("#fourA") || test.matches("#fourB") || test.matches("#fourC")) {
-
-        console.log("incorrect!");
-
+    } else if (test.matches("#fiveA") || test.matches("#fiveB") || test.matches("#fiveD")) {
         currentScore -= 10;
-
         endGame();
     };
 });

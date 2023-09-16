@@ -64,6 +64,10 @@ button {
     display: none;
 }
 
+#questionFive {
+    display: none;
+}
+
 #result-msg {
     display: none;
 }
