@@ -60,3 +60,8 @@ tr:nth-child(even) {
 #highScorePage {
     display: none;
 }
+
+#highScorePage header {
+    font-size: 20px;
+    font-weight: bolder;
+}
