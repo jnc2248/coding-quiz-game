@@ -41,11 +41,19 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    background-color: rgb(67, 0, 67);
+}
+
 #welcomePage {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 60%;
+}
+
+#welcomePage h1 {
+    font-size: 40px;
 }
 
 #questionOne {
@@ -76,9 +84,21 @@ button {
     display: none;
 }
 
+#inputPage input, input::placeholder {
+    font-size: 18px;
+}
+
+#inputPage h1 {
+    font-size: 40px;
+}
+
 #highScorePage {
     display: none;
 }
+
+#inputPage button {
+    margin-top: 20px;
+};
 
 #highScorePage header, p {
     font-size: 20px;
