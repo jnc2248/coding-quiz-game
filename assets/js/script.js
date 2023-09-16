@@ -6,8 +6,7 @@ var submitButton = document.querySelector("#submitBtn");
 var initialsInput = document.querySelector("#hs-name");
 var finalScore = document.querySelector("#finalScore");
 var highScorePage = document.querySelector("#highScorePage");
-// var hsList = document.querySelector("#hsList");
-// var testing = document.querySelector("#result-msg");
+var hsList = document.querySelector("#hsList");
 
 var currentScore = 0;
 var timerCount;
@@ -59,6 +58,7 @@ function playAgain() {
     document.querySelector("#questionFour").style.display = "none";
     document.querySelector("#result-msg").style.display = "none";
     document.querySelector("#inputPage").style.display = "none";
+    document.querySelector("#highScorePage").style.display = "none";
 }
 
 function endGame() {
@@ -102,6 +102,36 @@ function uploadHighscore() {
         hsList.appendChild(newRow);
     }
 };
+
+document.addEventListener("click", function (event) {
+    var test = event.target;
+
+    if (test.matches("#goBackBtn")) {
+// Make start button disabled false
+        playAgain();
+    };
+});
+
+document.addEventListener("click", function (event) {
+    var test = event.target;
+
+    console.log("hs listener working");
+
+    if (test.matches("#highScoreButton")) {
+        console.log("match working");
+
+        clearInterval(timer);
+
+        document.querySelector("#welcomePage").style.display = "none";
+        document.querySelector("#questionOne").style.display = "none";
+        document.querySelector("#questionTwo").style.display = "none";
+        document.querySelector("#questionThree").style.display = "none";
+        document.querySelector("#questionFour").style.display = "none";
+        document.querySelector("#result-msg").style.display = "none";
+        document.querySelector("#inputPage").style.display = "none";
+        document.querySelector("#highScorePage").style.display = "block";
+    };
+});
 
 inputPg.addEventListener("keydown", function () {
     submitButton.disabled = false;
@@ -231,7 +261,7 @@ main.addEventListener("click", function (event) {
 
         // currentScore += 10;
         // console.log(currentScore);
-        
+
         endGame();
 
     } else if (test.matches("#fourA") || test.matches("#fourB") || test.matches("#fourC")) {
