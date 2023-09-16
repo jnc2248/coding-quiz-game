@@ -4,7 +4,7 @@ var timerElement = document.querySelector("#timerCount");
 var startButton = document.querySelector("#startBtn");
 var submitButton = document.querySelector("#submitBtn");
 var initialsInput = document.querySelector("#hs-name");
-var finalScore = document.querySelector("#finalScore");
+var scoreInput = document.querySelector("#finalScore");
 var highScorePage = document.querySelector("#highScorePage");
 var hsList = document.querySelector("#hsList");
 
@@ -67,8 +67,8 @@ function playAgain() {
 
 function endGame() {
     clearInterval(timer);
-    currentScore = timerCount;
-    finalScore.textContent = currentScore;
+    finalScore = timerCount + currentScore;
+    scoreInput.textContent = finalScore;
 
     document.querySelector("#questionFour").style.display = "none";
     document.querySelector("#inputPage").style.display = "block";
@@ -176,7 +176,7 @@ document.addEventListener("click", function (event) {
 
         clearInterval(timer);
         showHighScore();
-        
+
         // document.querySelector("#welcomePage").style.display = "none";
         // document.querySelector("#questionOne").style.display = "none";
         // document.querySelector("#questionTwo").style.display = "none";
@@ -235,7 +235,7 @@ main.addEventListener("click", function (event) {
 
         showQ2();
 
-        // currentScore += 10;
+        currentScore += 10;
         // console.log(currentScore);
 
         // document.querySelector("#questionOne").style.display = "none";
@@ -248,10 +248,7 @@ main.addEventListener("click", function (event) {
 
         showQ2();
 
-        // if (currentScore > 0) {
-        //     currentScore -= 10;
-        //     console.log(currentScore);
-        // };
+        currentScore -= 10;
 
         // document.querySelector("#questionOne").style.display = "none";
         // document.querySelector("#questionTwo").style.display = "block";
@@ -265,7 +262,7 @@ main.addEventListener("click", function (event) {
 
         showQ3();
 
-        // currentScore += 10;
+        currentScore += 10;
         // console.log(currentScore);
 
         // document.querySelector("#questionTwo").style.display = "none";
@@ -277,10 +274,7 @@ main.addEventListener("click", function (event) {
 
         showQ3();
 
-        // if (currentScore > 0) {
-        //     currentScore -= 10;
-        //     console.log(currentScore);
-        // };
+        currentScore -= 10;
 
         // document.querySelector("#questionTwo").style.display = "none";
         // document.querySelector("#questionThree").style.display = "block";
@@ -292,7 +286,7 @@ main.addEventListener("click", function (event) {
 
         showQ4();
 
-        // currentScore += 10;
+        currentScore += 10;
         // console.log(currentScore);
 
         // document.querySelector("#questionThree").style.display = "none";
@@ -304,10 +298,7 @@ main.addEventListener("click", function (event) {
 
         showQ4();
 
-        // if (currentScore > 0) {
-        //     currentScore -= 10;
-        //     console.log(currentScore);
-        // };
+        currentScore -= 10;
 
         // document.querySelector("#questionThree").style.display = "none";
         // document.querySelector("#questionFour").style.display = "block";
@@ -317,7 +308,7 @@ main.addEventListener("click", function (event) {
 
         console.log("correct!");
 
-        // currentScore += 10;
+        currentScore += 10;
         // console.log(currentScore);
 
         endGame();
@@ -326,10 +317,7 @@ main.addEventListener("click", function (event) {
 
         console.log("incorrect!");
 
-        // if (currentScore > 0) {
-        //     currentScore -= 10;
-        //     console.log(currentScore);
-        // };
+        currentScore -= 10;
 
         endGame();
     };
