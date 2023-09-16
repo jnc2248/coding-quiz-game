@@ -45,6 +45,14 @@ button:hover {
     background-color: rgb(67, 0, 67);
 }
 
+.greenBtn:active {
+    background-color: rgb(119, 254, 95);
+}
+
+.redBtn:active {
+    background-color: rgb(241, 77, 77);
+}
+
 #welcomePage {
     display: flex;
     flex-direction: column;
