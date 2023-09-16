@@ -28,11 +28,10 @@ function startTimer() {
 function startGame() {
     timerCount = 60;
     startButton.disabled = true;
-    submitButton.disabled = true;
     startTimer();
-
-    document.querySelector("#questionOne").style.display = "block";
-    document.querySelector("#welcomePage").style.display = "none";
+    showQ1();
+    // document.querySelector("#questionOne").style.display = "block";
+    // document.querySelector("#welcomePage").style.display = "none";
 };
 
 function init() {
@@ -48,19 +47,22 @@ function init() {
     };
 
     uploadHighscore();
+    submitButton.disabled = true;
 };
 
 function playAgain() {
     startButton.disabled = false;
 
-    document.querySelector("#welcomePage").style.display = "block";
-    document.querySelector("#questionOne").style.display = "none";
-    document.querySelector("#questionTwo").style.display = "none";
-    document.querySelector("#questionThree").style.display = "none";
-    document.querySelector("#questionFour").style.display = "none";
-    document.querySelector("#result-msg").style.display = "none";
-    document.querySelector("#inputPage").style.display = "none";
-    document.querySelector("#highScorePage").style.display = "none";
+    showWelcome();
+
+    // document.querySelector("#welcomePage").style.display = "block";
+    // document.querySelector("#questionOne").style.display = "none";
+    // document.querySelector("#questionTwo").style.display = "none";
+    // document.querySelector("#questionThree").style.display = "none";
+    // document.querySelector("#questionFour").style.display = "none";
+    // document.querySelector("#result-msg").style.display = "none";
+    // document.querySelector("#inputPage").style.display = "none";
+    // document.querySelector("#highScorePage").style.display = "none";
 }
 
 function endGame() {
@@ -68,12 +70,7 @@ function endGame() {
     currentScore = timerCount;
     finalScore.textContent = currentScore;
 
-    document.querySelector("#welcomePage").style.display = "none";
-    document.querySelector("#questionOne").style.display = "none";
-    document.querySelector("#questionTwo").style.display = "none";
-    document.querySelector("#questionThree").style.display = "none";
     document.querySelector("#questionFour").style.display = "none";
-    document.querySelector("#result-msg").style.display = "none";
     document.querySelector("#inputPage").style.display = "block";
 };
 
@@ -104,12 +101,54 @@ function uploadHighscore() {
 };
 
 function clearHighScores() {
-    initialsAll.length = 0;
-    scoresAll.length = 0;
+    initialsAll = [];
+    scoresAll = [];
     console.log(initialsAll);
     console.log(scoresAll);
 
     storeAll();
+};
+
+function showWelcome() {
+    document.querySelector("#welcomePage").style.display = "block";
+    document.querySelector("#questionOne").style.display = "none";
+    document.querySelector("#questionTwo").style.display = "none";
+    document.querySelector("#questionThree").style.display = "none";
+    document.querySelector("#questionFour").style.display = "none";
+    document.querySelector("#result-msg").style.display = "none";
+    document.querySelector("#inputPage").style.display = "none";
+    document.querySelector("#highScorePage").style.display = "none";
+};
+
+function showQ1() {
+    document.querySelector("#welcomePage").style.display = "none";
+    document.querySelector("#questionOne").style.display = "block";
+};
+
+function showQ2() {
+    document.querySelector("#questionOne").style.display = "none";
+    document.querySelector("#questionTwo").style.display = "block";
+};
+
+function showQ3() {
+    document.querySelector("#questionTwo").style.display = "none";
+    document.querySelector("#questionThree").style.display = "block";
+};
+
+function showQ4() {
+    document.querySelector("#questionThree").style.display = "none";
+    document.querySelector("#questionFour").style.display = "block";
+};
+
+function showHighScore() {
+    document.querySelector("#welcomePage").style.display = "none";
+    document.querySelector("#questionOne").style.display = "none";
+    document.querySelector("#questionTwo").style.display = "none";
+    document.querySelector("#questionThree").style.display = "none";
+    document.querySelector("#questionFour").style.display = "none";
+    document.querySelector("#result-msg").style.display = "none";
+    document.querySelector("#inputPage").style.display = "none";
+    document.querySelector("#highScorePage").style.display = "block";
 };
 
 document.addEventListener("click", function (event) {
@@ -136,15 +175,16 @@ document.addEventListener("click", function (event) {
         console.log("match working");
 
         clearInterval(timer);
-
-        document.querySelector("#welcomePage").style.display = "none";
-        document.querySelector("#questionOne").style.display = "none";
-        document.querySelector("#questionTwo").style.display = "none";
-        document.querySelector("#questionThree").style.display = "none";
-        document.querySelector("#questionFour").style.display = "none";
-        document.querySelector("#result-msg").style.display = "none";
-        document.querySelector("#inputPage").style.display = "none";
-        document.querySelector("#highScorePage").style.display = "block";
+        showHighScore();
+        
+        // document.querySelector("#welcomePage").style.display = "none";
+        // document.querySelector("#questionOne").style.display = "none";
+        // document.querySelector("#questionTwo").style.display = "none";
+        // document.querySelector("#questionThree").style.display = "none";
+        // document.querySelector("#questionFour").style.display = "none";
+        // document.querySelector("#result-msg").style.display = "none";
+        // document.querySelector("#inputPage").style.display = "none";
+        // document.querySelector("#highScorePage").style.display = "block";
     };
 });
 
@@ -164,13 +204,11 @@ submitButton.addEventListener("click", function (event) {
 
     initialsInput.value = "";
 
-    console.log(initialsAll);
-
     scoresAll.push(currentScore);
 
-    console.log(scoresAll);
-
     storeAll();
+
+    submitButton.disabled = true;
 });
 
 main.addEventListener("click", function (event) {
@@ -195,25 +233,29 @@ main.addEventListener("click", function (event) {
 
         console.log("correct!");
 
+        showQ2();
+
         // currentScore += 10;
         // console.log(currentScore);
 
-        document.querySelector("#questionOne").style.display = "none";
-        document.querySelector("#questionTwo").style.display = "block";
-        document.querySelector("#result-msg").style.display = "block";
+        // document.querySelector("#questionOne").style.display = "none";
+        // document.querySelector("#questionTwo").style.display = "block";
+        // document.querySelector("#result-msg").style.display = "block";
 
     } else if (test.matches("#oneB") || test.matches("#oneC") || test.matches("#oneD")) {
 
         console.log("incorrect!");
+
+        showQ2();
 
         // if (currentScore > 0) {
         //     currentScore -= 10;
         //     console.log(currentScore);
         // };
 
-        document.querySelector("#questionOne").style.display = "none";
-        document.querySelector("#questionTwo").style.display = "block";
-        document.querySelector("#result-msg").style.display = "block";
+        // document.querySelector("#questionOne").style.display = "none";
+        // document.querySelector("#questionTwo").style.display = "block";
+        // document.querySelector("#result-msg").style.display = "block";
 
     };
 
@@ -221,46 +263,54 @@ main.addEventListener("click", function (event) {
 
         console.log("correct!");
 
+        showQ3();
+
         // currentScore += 10;
         // console.log(currentScore);
 
-        document.querySelector("#questionTwo").style.display = "none";
-        document.querySelector("#questionThree").style.display = "block";
+        // document.querySelector("#questionTwo").style.display = "none";
+        // document.querySelector("#questionThree").style.display = "block";
 
     } else if (test.matches("#twoA") || test.matches("#twoC") || test.matches("#twoD")) {
 
         console.log("incorrect!");
+
+        showQ3();
 
         // if (currentScore > 0) {
         //     currentScore -= 10;
         //     console.log(currentScore);
         // };
 
-        document.querySelector("#questionTwo").style.display = "none";
-        document.querySelector("#questionThree").style.display = "block";
+        // document.querySelector("#questionTwo").style.display = "none";
+        // document.querySelector("#questionThree").style.display = "block";
     };
 
     if (test.matches("#threeC")) {
 
         console.log("correct!");
 
+        showQ4();
+
         // currentScore += 10;
         // console.log(currentScore);
 
-        document.querySelector("#questionThree").style.display = "none";
-        document.querySelector("#questionFour").style.display = "block";
+        // document.querySelector("#questionThree").style.display = "none";
+        // document.querySelector("#questionFour").style.display = "block";
 
     } else if (test.matches("#threeA") || test.matches("#threeB") || test.matches("#threeD")) {
 
         console.log("incorrect!");
+
+        showQ4();
 
         // if (currentScore > 0) {
         //     currentScore -= 10;
         //     console.log(currentScore);
         // };
 
-        document.querySelector("#questionThree").style.display = "none";
-        document.querySelector("#questionFour").style.display = "block";
+        // document.querySelector("#questionThree").style.display = "none";
+        // document.querySelector("#questionFour").style.display = "block";
     };
 
     if (test.matches("#fourD")) {

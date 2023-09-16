@@ -61,7 +61,7 @@ tr:nth-child(even) {
     display: none;
 }
 
-#highScorePage header {
+#highScorePage header, p {
     font-size: 20px;
     font-weight: bolder;
 }
