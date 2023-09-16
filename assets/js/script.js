@@ -91,9 +91,6 @@ function uploadHighscore() {
 function clearHighScores() {
     initialsAll = [];
     scoresAll = [];
-    console.log(initialsAll);
-    console.log(scoresAll);
-
     storeAll();
 };
 
