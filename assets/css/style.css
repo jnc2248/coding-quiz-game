@@ -1,3 +1,8 @@
+* {
+    font-family: 'Source Code Pro', monospace;
+    background-color: rgb(232, 232, 232);
+}
+
 nav {
     display: flex;
     flex-wrap: wrap;
@@ -23,14 +28,24 @@ td, th {
     padding: 10px;
 }
 
-tr:nth-child(even) {
-    background-color: #e7d9fc;
-  }
+button {
+    background-color: #e3c2ff;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 2px;
+    cursor: pointer;
+}
 
 #welcomePage {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 60%;
 }
 
 #questionOne {

@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Linear+B&family=Roboto+Mono&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Coding Quiz Game</title>
 </head>
@@ -16,6 +19,7 @@
     <main>
         <section id="welcomePage">
             <h1>Welcome to the Coding Quiz Challenge!</h1>
+            <p>When you hit start, the quiz will begin. Answer the questions as fast and as accurately as possible. For each correct answer, you will gain 10 points towards your point total and lose 10 points for each incorrect choice. Final score will be your point total plus your time remaining. Good luck!</p>
             <button type="button" id="startBtn">Start Game</button>
         </section>
         <section id="questionOne">
@@ -47,11 +51,12 @@
             <button id="fourD">Placeholder for answers</button><br><br>
         </section>
         <section id="result-msg">
-            <p>Win or Lose Message</p>
+            <p>————————————————————————————————————————</p>
+            <p></p>
         </section>
         <section id="inputPage">
             <h1>Game Over!</h1>
-            <p>Your score: <span id="finalScore"></span> points!</p>
+            <p>Your score: <span id="finalScore"></span> points</p>
             <input type="text" placeholder="Enter initials here" name="hs-name" id="hs-name">
             <button type="button" id="submitBtn">Save Score</button>
             <br>

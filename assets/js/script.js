@@ -6,6 +6,7 @@ var submitButton = document.querySelector("#submitBtn");
 var initialsInput = document.querySelector("#hs-name");
 var scoreInput = document.querySelector("#finalScore");
 var highScorePage = document.querySelector("#highScorePage");
+var resultMsg = document.querySelector("#result-msg");
 var hsList = document.querySelector("#hsList");
 
 var currentScore = 0;
@@ -70,6 +71,7 @@ function endGame() {
     finalScore = timerCount + currentScore;
     scoreInput.textContent = finalScore;
 
+    document.querySelector("#result-msg").style.display = "none";
     document.querySelector("#questionFour").style.display = "none";
     document.querySelector("#inputPage").style.display = "block";
 };
@@ -151,6 +153,16 @@ function showHighScore() {
     document.querySelector("#highScorePage").style.display = "block";
 };
 
+function correctAnswer() {
+    document.querySelector("#result-msg").style.display = "block";
+    resultMsg.children[1].textContent = "Correct!"
+};
+
+function wrongAnswer() {
+    document.querySelector("#result-msg").style.display = "block";
+    resultMsg.children[1].textContent = "Incorrect!"
+};
+
 document.addEventListener("click", function (event) {
     var test = event.target;
 
@@ -194,6 +206,8 @@ inputPg.addEventListener("keydown", function () {
 
 submitButton.addEventListener("click", function (event) {
 
+    submitButton.disabled = true;
+
     var initials = initialsInput.value.trim();
 
     if (initials === "") {
@@ -204,11 +218,9 @@ submitButton.addEventListener("click", function (event) {
 
     initialsInput.value = "";
 
-    scoresAll.push(currentScore);
+    scoresAll.push(finalScore);
 
     storeAll();
-
-    submitButton.disabled = true;
 });
 
 main.addEventListener("click", function (event) {
@@ -233,10 +245,12 @@ main.addEventListener("click", function (event) {
 
         console.log("correct!");
 
-        showQ2();
-
         currentScore += 10;
         // console.log(currentScore);
+
+        correctAnswer();
+
+        showQ2();
 
         // document.querySelector("#questionOne").style.display = "none";
         // document.querySelector("#questionTwo").style.display = "block";
@@ -246,9 +260,11 @@ main.addEventListener("click", function (event) {
 
         console.log("incorrect!");
 
-        showQ2();
-
         currentScore -= 10;
+
+        wrongAnswer();
+
+        showQ2();
 
         // document.querySelector("#questionOne").style.display = "none";
         // document.querySelector("#questionTwo").style.display = "block";
@@ -259,6 +275,8 @@ main.addEventListener("click", function (event) {
     if (test.matches("#twoB")) {
 
         console.log("correct!");
+
+        correctAnswer();
 
         showQ3();
 
@@ -272,6 +290,8 @@ main.addEventListener("click", function (event) {
 
         console.log("incorrect!");
 
+        wrongAnswer();
+
         showQ3();
 
         currentScore -= 10;
@@ -284,6 +304,8 @@ main.addEventListener("click", function (event) {
 
         console.log("correct!");
 
+        correctAnswer();
+
         showQ4();
 
         currentScore += 10;
@@ -295,6 +317,8 @@ main.addEventListener("click", function (event) {
     } else if (test.matches("#threeA") || test.matches("#threeB") || test.matches("#threeD")) {
 
         console.log("incorrect!");
+
+        wrongAnswer();
 
         showQ4();
 
