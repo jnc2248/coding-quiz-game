@@ -95,7 +95,7 @@ function clearHighScores() {
 };
 
 function showWelcome() {
-    document.querySelector("#welcomePage").style.display = "block";
+    document.querySelector("#welcomePage").style.display = "flex";
     document.querySelector("#questionOne").style.display = "none";
     document.querySelector("#questionTwo").style.display = "none";
     document.querySelector("#questionThree").style.display = "none";
